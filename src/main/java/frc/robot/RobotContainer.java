@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
+  private final RomiDrivetrain m_rdt = new RomiDrivetrain();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
+  private final FowardWithPID m_FowardWithPID = new FowardWithPID(m_rdt, 900);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -42,6 +42,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_FowardWithPID;
   }
 }
