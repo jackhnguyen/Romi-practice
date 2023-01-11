@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.PIDController;
 
 public class RomiDrivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
@@ -25,6 +26,10 @@ public class RomiDrivetrain extends SubsystemBase {
 
   // Set up the differential drive controller
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+
+  //Making for the Romi Gyro
+  private final PIDController m_PIDController = new PIDController(0.1, 0, 0);
+  public static RomiGyro m_gyro = new RomiGyro();
 
   /** Creates a new RomiDrivetrain. */
   public RomiDrivetrain() {
@@ -52,6 +57,10 @@ public class RomiDrivetrain extends SubsystemBase {
 
   public double getRightDistanceInch() {
     return m_rightEncoder.getDistance();
+  }
+
+  public double getAverageDistanceInch(){
+    return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance())/2.0;
   }
 
   @Override
