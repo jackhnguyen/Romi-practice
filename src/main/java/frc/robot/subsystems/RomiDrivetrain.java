@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.controller.PIDController;
 
+
 public class RomiDrivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
   private static final double kWheelDiameterInch = 2.75591; // 70 mm
@@ -61,6 +62,10 @@ public class RomiDrivetrain extends SubsystemBase {
 
   public double getAverageDistanceInch(){
     return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance())/2.0;
+  }
+
+  public void straightLineWithPID(double sped){
+    m_diffDrive.arcadeDrive(sped, m_PIDController.calculate(-m_gyro.getAngleZ(), 0));
   }
 
   @Override
